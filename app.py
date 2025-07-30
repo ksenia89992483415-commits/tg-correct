@@ -1,7 +1,7 @@
 import os
 import telebot
 
-TOKEN = os.getenv('5771183937:AAHBYjt7maRu20ZuypuBCtAsGBUzrrrilV8')
+TOKEN = os.getenv('-5771183937:AAHBYjt7maRu20ZuypuBCtAsGBUzrrrilV8')
 TARGET_CHAT_ID = int(os.getenv('-5771183937'))
 
 bot = telebot.TeleBot(TOKEN)
