@@ -1,17 +1,18 @@
 import telebot
 
-# ТВОЙ токен и ID группы
 TOKEN = "5771183937:AAHBYjt7maRu20ZuypuBCtAsGBUzrrrilV8"
-TARGET_CHAT_ID = -1086767676  # для группы всегда ставим минус
+TARGET_CHAT_ID = -1086767676  # ID группы/канала, обязательно с минусом для супергрупп
 
 bot = telebot.TeleBot(TOKEN)
 
-@bot.message_handler(content_types=['text', 'photo', 'video', 'document', 'sticker', 'voice'])
+@bot.message_handler(func=lambda message: True)
 def forward_message(message):
     try:
+        # Пересылаем сообщение в целевой чат
         bot.forward_message(TARGET_CHAT_ID, message.chat.id, message.message_id)
+        print(f"Переслали сообщение {message.message_id} от {message.chat.id}")
     except Exception as e:
-        print("Ошибка пересылки:", e)
+        print(f"Ошибка при пересылке: {e}")
 
 print("Бот запущен...")
-bot.infinity_polling(timeout=60, long_polling_timeout=60)
+bot.infinity_polling()
